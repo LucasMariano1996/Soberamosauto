@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soberano Automóveis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#080808;
+      --surface:#111;
+      --surface2:#161616;
+      --red:#cc0000;
+      --red2:#e60000;
+      --red-glow:rgba(204,0,0,.25);
+      --stroke:rgba(255,255,255,.08);
+      --stroke-red:rgba(204,0,0,.35);
+      --text:#f5f5f5;
+      --muted:#999;
+      --muted2:#666;
+      --whats:#25d366;
+      --radius:16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{
+      background:var(--bg);
+      color:var(--text);
+      font-family:'Montserrat',sans-serif;
+      scroll-behavior:smooth;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ── HEADER ── */
+    header{
+      position:sticky;top:0;z-index:1000;
+      background:rgba(8,8,8,.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--stroke);
+    }
+    .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:16px}
+
+    .brand{display:flex;align-items:center;gap:14px}
+    .logo-circle{
+      width:46px;height:46px;border-radius:50%;
+      background:#000;
+      border:2px solid var(--red);
+      box-shadow:0 0 18px var(--red-glow);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.3rem;font-weight:900;color:var(--red);
+      letter-spacing:-1px;
+    }
+    .brand-text h1{font-size:1rem;font-weight:900;letter-spacing:.02em;line-height:1.1}
+    .brand-text small{display:block;font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-top:2px}
+
+    nav{display:flex;gap:4px}
+    nav a{
+      padding:9px 14px;border-radius:999px;
+      font-weight:700;font-size:.86rem;color:var(--muted);
+      border:1px solid transparent;
+      transition:.2s;
+    }
+    nav a:hover{color:var(--text);border-color:var(--stroke);background:rgba(255,255,255,.04)}
+
+    .header-cta{display:flex;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:10px 18px;border-radius:999px;
+      font-weight:800;font-size:.88rem;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      cursor:pointer;transition:.2s;
+    }
+    .btn:hover{background:rgba(255,255,255,.07);transform:translateY(-1px)}
+    .btn-red{
+      background:var(--red);
+      border-color:var(--red2);
+      box-shadow:0 6px 24px var(--red-glow);
+    }
+    .btn-red:hover{background:var(--red2);box-shadow:0 8px 30px rgba(204,0,0,.4)}
+
+    /* ── HERO ── */
+    .hero{
+      padding:60px 0 40px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;top:-200px;left:-200px;
+      width:700px;height:700px;border-radius:50%;
+      background:radial-gradient(circle, rgba(204,0,0,.18) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;bottom:-100px;right:-100px;
+      width:500px;height:500px;border-radius:50%;
+      background:radial-gradient(circle, rgba(204,0,0,.10) 0%, transparent 65%);
+      pointer-events:none;
+    }
+    .hero-inner{
+      position:relative;z-index:1;
+      display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center;
+    }
+    .hero-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 14px;border-radius:999px;
+      border:1px solid var(--stroke-red);
+      background:rgba(204,0,0,.10);
+      font-size:.75rem;font-weight:800;
+      color:rgba(255,255,255,.85);
+      text-transform:uppercase;letter-spacing:.14em;
+      margin-bottom:18px;
+    }
+    .hero h2{
+      font-size:2.6rem;font-weight:900;
+      line-height:1.05;letter-spacing:-.03em;
+      margin-bottom:14px;
+    }
+    .hero h2 em{font-style:normal;color:var(--red2)}
+    .hero p{
+      color:var(--muted);font-weight:600;line-height:1.7;
+      max-width:52ch;margin-bottom:24px;
+    }
+    .hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:9px 12px;border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      font-size:.8rem;font-weight:700;color:var(--muted);
+    }
+
+    .hero-stats{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
+    }
+    .stat-card{
+      background:var(--surface);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      padding:20px;
+      position:relative;overflow:hidden;
+    }
+    .stat-card::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--red),transparent);
+    }
+    .stat-card h3{font-size:2rem;font-weight:900;color:var(--red2);line-height:1}
+    .stat-card p{font-size:.78rem;font-weight:700;color:var(--muted);margin-top:4px}
+
+    /* ── FILTERS ── */
+    .filters-bar{
+      padding:24px 0 12px;
+      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+    }
+    .chip{
+      padding:9px 16px;border-radius:999px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+      font-weight:800;font-size:.84rem;
+      cursor:pointer;transition:.2s;user-select:none;
+    }
+    .chip:hover{color:var(--text);border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05)}
+    .chip.active{
+      background:rgba(204,0,0,.15);
+      border-color:var(--stroke-red);
+      color:var(--text);
+    }
+
+    /* ── SECTION TITLE ── */
+    .sec-head{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      gap:12px;flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .sec-head h2{font-size:1.4rem;font-weight:900;letter-spacing:-.02em}
+    .sec-head h2 span{color:var(--red2)}
+    .sec-head p{color:var(--muted);font-weight:600;font-size:.9rem}
+
+    /* ── GRID ── */
+    .cars-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+      gap:18px;
+      padding-bottom:70px;
+    }
+
+    /* ── CARD ── */
+    .car-card{
+      background:var(--surface);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      overflow:hidden;
+      transition:transform .2s,border-color .2s,box-shadow .2s;
+      position:relative;
+    }
+    .car-card:hover{
+      transform:translateY(-6px);
+      border-color:var(--stroke-red);
+      box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 0 1px rgba(204,0,0,.15);
+    }
+    .car-media{
+      height:200px;
+      display:flex;align-items:center;justify-content:center;
+      background:
+        radial-gradient(500px 200px at 30% 30%, rgba(204,0,0,.15), transparent 55%),
+        linear-gradient(145deg,rgba(255,255,255,.04),rgba(255,255,255,.01));
+      border-bottom:1px solid var(--stroke);
+      position:relative;
+      font-size:4.5rem;
+    }
+    .car-tag{
+      position:absolute;top:12px;left:12px;
+      padding:6px 10px;border-radius:999px;
+      font-size:.7rem;font-weight:900;
+      text-transform:uppercase;letter-spacing:.12em;
+      backdrop-filter:blur(8px);
+    }
+    .car-tag.novo{background:rgba(204,0,0,.25);border:1px solid rgba(204,0,0,.45);color:#ffaaaa}
+    .car-tag.semi{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.8)}
+
+    .car-body{padding:18px}
+    .car-name{font-size:1.05rem;font-weight:900;letter-spacing:-.01em;margin-bottom:4px}
+    .car-year{font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:12px}
+    .car-specs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .car-spec{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:7px 10px;border-radius:10px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      font-size:.78rem;font-weight:800;color:rgba(255,255,255,.8);
+    }
+    .car-price{
+      display:flex;align-items:baseline;justify-content:space-between;
+      margin-bottom:14px;
+    }
+    .car-price strong{font-size:1.3rem;font-weight:900;color:var(--red2)}
+    .car-price span{font-size:.78rem;font-weight:700;color:var(--muted2)}
+    .car-actions{display:flex;gap:8px}
+    .btn-wpp{
+      flex:1;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px;border-radius:12px;
+      background:rgba(37,211,102,.12);
+      border:1px solid rgba(37,211,102,.30);
+      color:#c8ffd8;
+      font-weight:900;font-size:.88rem;
+      transition:.2s;
+    }
+    .btn-wpp:hover{background:rgba(37,211,102,.18);transform:translateY(-1px)}
+    .btn-info{
+      width:46px;
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:12px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      font-size:1.1rem;
+      transition:.2s;
+    }
+    .btn-info:hover{background:rgba(255,255,255,.06);transform:translateY(-1px)}
+
+    /* ── ABOUT ── */
+    .about-section{
+      padding:60px 0;
+      border-top:1px solid var(--stroke);
+    }
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+    .about-text h2{font-size:1.8rem;font-weight:900;letter-spacing:-.02em;margin-bottom:14px}
+    .about-text h2 span{color:var(--red2)}
+    .about-text p{color:var(--muted);font-weight:600;line-height:1.75;margin-bottom:14px}
+    .about-text p:last-child{margin-bottom:0}
+
+    .contact-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .contact-card{
+      background:var(--surface);
+      border:1px solid var(--stroke);
+      border-radius:var(--radius);
+      padding:18px;
+      position:relative;overflow:hidden;
+    }
+    .contact-card::before{
+      content:"";position:absolute;top:0;left:0;right:0;height:2px;
+      background:linear-gradient(90deg,var(--red),transparent);
+    }
+    .contact-card .icon{font-size:1.5rem;margin-bottom:8px}
+    .contact-card h4{font-size:.7rem;font-weight:800;color:var(--muted2);text-transform:uppercase;letter-spacing:.14em;margin-bottom:6px}
+    .contact-card p{font-size:.92rem;font-weight:700;color:var(--text);line-height:1.5}
+
+    /* ── FOOTER ── */
+    footer{
+      border-top:1px solid var(--stroke);
+      padding:24px 0 36px;
+    }
+    .footer-inner{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:16px;flex-wrap:wrap;
+    }
+    .footer-inner p{font-size:.82rem;font-weight:700;color:var(--muted2)}
+    .footer-inner a{color:var(--red2)}
+    .footer-inner a:hover{text-decoration:underline}
+    .social-links{display:flex;gap:10px}
+    .social-link{
+      width:38px;height:38px;border-radius:10px;
+      border:1px solid var(--stroke);
+      background:rgba(255,255,255,.03);
+      display:flex;align-items:center;justify-content:center;
+      font-size:1rem;transition:.2s;
+    }
+    .social-link:hover{border-color:var(--stroke-red);background:rgba(204,0,0,.10)}
+
+    /* ── FLOATING WPP ── */
+    .wpp-float{
+      position:fixed;right:20px;bottom:20px;z-index:9999;
+      display:flex;align-items:center;gap:10px;
+      padding:13px 18px;border-radius:999px;
+      background:rgba(37,211,102,.15);
+      border:1px solid rgba(37,211,102,.35);
+      color:#c8ffd8;
+      font-weight:900;font-size:.9rem;
+      box-shadow:0 16px 50px rgba(0,0,0,.5);
+      backdrop-filter:blur(10px);
+      transition:.2s;
+    }
+    .wpp-float:hover{transform:translateY(-2px);background:rgba(37,211,102,.20)}
+    .wpp-dot{
+      width:9px;height:9px;border-radius:50%;
+      background:var(--whats);
+      box-shadow:0 0 0 5px rgba(37,211,102,.15);
+      animation:pulse 2s infinite;
+    }
+    @keyframes pulse{
+      0%,100%{box-shadow:0 0 0 5px rgba(37,211,102,.15)}
+      50%{box-shadow:0 0 0 9px rgba(37,211,102,.05)}
+    }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      nav{display:none}
+      .hero-inner{grid-template-columns:1fr}
+      .hero-stats{grid-template-columns:repeat(4,1fr)}
+      .about-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .wrap{padding:0 16px}
+      .header-cta .btn:first-child{display:none}
+      .hero h2{font-size:1.9rem}
+      .hero-stats{grid-template-columns:1fr 1fr}
+      .contact-cards{grid-template-columns:1fr}
+      .footer-inner{flex-direction:column;text-align:center}
+      .wpp-float{left:16px;right:16px;justify-content:center}
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo-circle">S</div>
+        <div class="brand-text">
+          <h1>SOBERANO AUTOMÓVEIS</h1>
+          <small>Bauru / SP • Venda e Aluguel</small>
+        </div>
+      </div>
+      <nav>
+        <a href="#estoque">Estoque</a>
+        <a href="#sobre">Quem somos</a>
+        <a href="#contato">Contato</a>
+        <a href="https://www.instagram.com/soberanoautomoveisbr/" target="_blank">Instagram</a>
+      </nav>
+      <div class="header-cta">
+        <a class="btn" href="#estoque">Ver estoque</a>
+        <a class="btn btn-red" id="wppHeader" href="#" target="_blank">📲 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-tag">🏆 A sua escolha de confiança para veículos de qualidade</div>
+        <h2>Venda, Aluguel e<br><em>Qualidade</em> que<br>você merece.</h2>
+        <p>Encontre o veículo ideal no nosso salão em Bauru/SP. Atendimento personalizado, financiamento facilitado e documentação garantida.</p>
+        <div class="hero-btns">
+          <a class="btn btn-red" href="#estoque">Ver veículos disponíveis</a>
+          <a class="btn" id="wppHero" href="#" target="_blank">Falar no WhatsApp</a>
+        </div>
+        <div class="badges">
+          <div class="badge">🏦 Financiamento</div>
+          <div class="badge">🔁 Troca</div>
+          <div class="badge">🚗 Aluguel</div>
+          <div class="badge">📋 Documentação</div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card"><h3>+500</h3><p>Veículos vendidos</p></div>
+        <div class="stat-card"><h3>15+</h3><p>Anos no mercado</p></div>
+        <div class="stat-card"><h3>98%</h3><p>Clientes satisfeitos</p></div>
+        <div class="stat-card"><h3>100%</h3><p>Documentação ok</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTOQUE -->
+<section id="estoque">
+  <div class="wrap">
+    <div class="filters-bar">
+      <button class="chip active" onclick="filter('todos',this)">Todos</button>
+      <button class="chip" onclick="filter('novo',this)">Novos</button>
+      <button class="chip" onclick="filter('semi',this)">Seminovos</button>
+      <button class="chip" onclick="filter('suv',this)">SUVs</button>
+      <button class="chip" onclick="filter('sedan',this)">Sedans</button>
+      <button class="chip" onclick="filter('hatch',this)">Hatches</button>
+      <button class="chip" onclick="filter('pickup',this)">Pickups</button>
+    </div>
+    <div class="sec-head">
+      <div>
+        <h2>Estoque <span>Disponível</span></h2>
+        <p id="countLabel">9 veículos encontrados</p>
+      </div>
+    </div>
+    <div class="cars-grid" id="carsGrid"></div>
+  </div>
+</section>
+
+<!-- SOBRE / CONTATO -->
+<section class="about-section" id="sobre">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-text">
+        <h2>Quem somos nós, a <span>Soberano</span>?</h2>
+        <p>Somos uma empresa especializada em venda e aluguel de veículos, localizada em Bauru/SP. Nosso compromisso é oferecer veículos de qualidade com transparência e atendimento de excelência.</p>
+        <p>Trabalhamos com as principais marcas do mercado, oferecendo opções para todos os perfis e necessidades. Seja para comprar, trocar ou alugar, estamos prontos para te atender.</p>
+        <div style="margin-top:20px">
+          <a class="btn btn-red" id="wppSobre" href="#" target="_blank" style="display:inline-flex">📲 Falar com um consultor</a>
+        </div>
+      </div>
+      <div class="contact-cards" id="contato">
+        <div class="contact-card">
+          <div class="icon">📍</div>
+          <h4>Localização</h4>
+          <p>Bauru / SP</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">📞</div>
+          <h4>WhatsApp</h4>
+          <p>(14) 99790-7242</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">🕐</div>
+          <h4>Horário</h4>
+          <p>Seg–Sex: 8h–18h<br>Sáb: 8h–14h</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">📸</div>
+          <h4>Instagram</h4>
+          <p>@soberanoautomoveisbr</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="footer-inner">
+      <p>© 2025 <a href="#">Soberano Automóveis</a>. Todos os direitos reservados.</p>
+      <div class="social-links">
+        <a class="social-link" href="https://www.instagram.com/soberanoautomoveisbr/" target="_blank" title="Instagram">📸</a>
+        <a class="social-link" id="wppFooter" href="#" target="_blank" title="WhatsApp">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WPP -->
+<a class="wpp-float" id="wppFloat" href="#" target="_blank">
+  <div class="wpp-dot"></div>
+  💬 Falar no WhatsApp
+</a>
+
+<script>
+  const WPP = "5514997907242";
+  const MSG = encodeURIComponent("Olá! Vi o site da Soberano Automóveis e gostaria de mais informações.");
+
+  function wppLink(car){
+    if(car){
+      const m = encodeURIComponent(`Olá! Tenho interesse no *${car.name} ${car.year}* (${car.price}). Pode me passar mais detalhes?`);
+      return `https://wa.me/${WPP}?text=${m}`;
+    }
+    return `https://wa.me/${WPP}?text=${MSG}`;
+  }
+
+  // Set generic WPP links
+  ["wppHeader","wppHero","wppSobre","wppFloat","wppFooter"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.href = wppLink();
+  });
+
+  const cars = [
+    {id:1,name:"Toyota Corolla XEi",year:"2023",price:"R$ 149.900",km:"18.000 km",fuel:"Flex",type:"sedan",cond:"semi",emoji:"🚗"},
+    {id:2,name:"Jeep Compass Limited",year:"2024",price:"R$ 219.900",km:"5.200 km",fuel:"Flex",type:"suv",cond:"semi",emoji:"🚙"},
+    {id:3,name:"Volkswagen Polo Track",year:"2024",price:"R$ 89.900",km:"0 km",fuel:"Flex",type:"hatch",cond:"novo",emoji:"🚘"},
+    {id:4,name:"Honda HR-V EXL",year:"2023",price:"R$ 179.900",km:"22.000 km",fuel:"Flex",type:"suv",cond:"semi",emoji:"🚙"},
+    {id:5,name:"Hyundai HB20 Vision",year:"2024",price:"R$ 79.900",km:"0 km",fuel:"Flex",type:"hatch",cond:"novo",emoji:"🚗"},
+    {id:6,name:"Chevrolet Onix Plus LTZ",year:"2023",price:"R$ 109.900",km:"31.000 km",fuel:"Flex",type:"sedan",cond:"semi",emoji:"🚗"},
+    {id:7,name:"Toyota SW4 Diamond",year:"2022",price:"R$ 389.900",km:"45.000 km",fuel:"Diesel",type:"suv",cond:"semi",emoji:"🚙"},
+    {id:8,name:"Fiat Toro Volcano",year:"2024",price:"R$ 155.900",km:"0 km",fuel:"Turbo Flex",type:"pickup",cond:"novo",emoji:"🛻"},
+    {id:9,name:"Chevrolet Montana",year:"2023",price:"R$ 89.900",km:"28.000 km",fuel:"Flex",type:"pickup",cond:"semi",emoji:"🛻"},
+  ];
+
+  function renderCars(list){
+    const grid = document.getElementById("carsGrid");
+    document.getElementById("countLabel").textContent = `${list.length} veículo${list.length!==1?"s":""} encontrado${list.length!==1?"s":""}`;
+    if(!list.length){
+      grid.innerHTML='<p style="color:var(--muted);grid-column:1/-1;padding:40px;text-align:center;font-weight:700">Nenhum veículo encontrado.</p>';
+      return;
+    }
+    grid.innerHTML = list.map(c=>`
+      <div class="car-card">
+        <div class="car-media">
+          <span class="car-tag ${c.cond}">${c.cond==="novo"?"✨ Novo":"🔄 Seminovo"}</span>
+          ${c.emoji}
+        </div>
+        <div class="car-body">
+          <div class="car-name">${c.name}</div>
+          <div class="car-year">${c.year}</div>
+          <div class="car-specs">
+            <span class="car-spec">🛣️ ${c.km}</span>
+            <span class="car-spec">⛽ ${c.fuel}</span>
+          </div>
+          <div class="car-price">
+            <strong>${c.price}</strong>
+            <span>+ financiamento</span>
+          </div>
+          <div class="car-actions">
+            <a class="btn-wpp" href="${wppLink(c)}" target="_blank">
+              💬 Tenho interesse
+            </a>
+            <a class="btn-info" href="${wppLink(c)}" target="_blank" title="Mais info">ℹ️</a>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function filter(type, btn){
+    document.querySelectorAll(".chip").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    const filtered = type==="todos" ? cars : cars.filter(c=>c.type===type||c.cond===type);
+    renderCars(filtered);
+  }
+
+  renderCars(cars);
+</script>
+</body>
+</html>
